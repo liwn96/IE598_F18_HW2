@@ -32,6 +32,8 @@ plt.ylabel('petal width [standardized]')
 plt.legend(loc='upper left')
 plt.show()
 
+from sklearn import metrics
+
 #adjust k
 from sklearn.metrics import accuracy_score
 #try k=1 through k=25 and record testing accuracy
@@ -61,6 +63,8 @@ for i in range(len(K)):
     y_pred=knn.predict(X_test_std)
     X_combined_std = np.vstack((X_train_std, X_test_std))
     y_combined = np.hstack((y_train, y_test))
+    
+    print(metrics.classification_report(y_test,y_pred,target_names=iris.target_names))
     
     knn.fit(X_train_std, y_train)
     plot_decision_regions(X_combined_std, y_combined, clf=knn)
